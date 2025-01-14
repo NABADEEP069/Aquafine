@@ -1,0 +1,51 @@
+{
+    "reportTitle": "AI-Driven Remote Sensing for Fish Production Estimation Report",
+    "identifiedWaterBodies": [
+      {
+        "id": 1,
+        "area": 50.5,
+        "geometry": "POLYGON ((0 0, 1 0, 1 1, 0 1, 0 0))"
+      },
+      {
+        "id": 2,
+        "area": 75.2,
+        "geometry": "POLYGON ((2 2, 3 2, 3 3, 2 3, 2 2))"
+      },
+      {
+        "id": 3,
+        "area": 33.1,
+        "geometry": "POLYGON ((4 4, 5 4, 5 5, 4 5, 4 4))"
+      }
+    ],
+    "integratedEnvironmentalParameters": [
+      {
+        "id": 1,
+        "area": 50.5,
+        "geometry": "POLYGON ((0 0, 1 0, 1 1, 0 1, 0 0))",
+        "temperature": 25.4,
+        "pH": 7.2
+      },
+      {
+        "id": 2,
+        "area": 75.2,
+        "geometry": "POLYGON ((2 2, 3 2, 3 3, 2 3, 2 2))",
+        "temperature": 27.8,
+        "pH": 6.8
+      },
+      {
+        "id": 3,
+        "area": 33.1,
+        "geometry": "POLYGON ((4 4, 5 4, 5 5, 4 5, 4 4))",
+        "temperature": 22.1,
+        "pH": 7.5
+      }
+    ],
+    "modelEvaluation": {
+      "meanSquaredError": 0.026736639228590042,
+      "rSquared": 0.6672229046849598
+    },
+    "fishProductionCapacityPredictions": [
+      0.44819336, 0.42462329, 0.39308011, 0.38726665, 0.41128545, 0.38752702,
+      0.3904451, 0.42088594, 0.4069835, 0.48466501
+    ]
+  }
