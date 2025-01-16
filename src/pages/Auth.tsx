@@ -45,7 +45,7 @@ export default function Auth() {
         if (error) throw error;
 
         toast.success('Welcome back!');
-        navigate('/');
+        navigate('/search');
       }
     } catch (error) {
       if (error instanceof Error && error.message.includes('User already registered')) {

@@ -1,6 +1,7 @@
 import { useAuth } from '../context/AuthContext';
 import Mapp from '../components/Map';
 import { Link } from 'react-router-dom';
+import { Search } from 'lucide-react';
 
 export default function Home() {
   const { user } = useAuth();
@@ -20,9 +21,7 @@ export default function Home() {
           AquaFine is an innovative solution designed to revolutionize fish production planning by leveraging cutting-edge technology. Traditional methods of manual surveys are labor-intensive, error-prone, and inadequate for large or remote water bodies. AquaFine addresses these challenges through advanced remote sensing, AI, and data-driven insights to optimize aquaculture operations. By integrating satellite imagery, environmental data, and predictive models, AquaFine provides scalable tools for precise production potential estimation.
         </h1>
 
-        <div className="space-y-6">
-          <Mapp />
-
+        <div>
           <div className="flex items-center justify-center h-[150px]">
             <Link to="/auth">
               <button className="px-6 py-3 rounded-md border border-black bg-white text-black text-sm sm:text-base hover:shadow-[6px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
@@ -31,22 +30,9 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xxl transition-shadow duration-500 cursor-pointer">
-            <h2 className="text-2xl sm:text-3xl font-semibold mb-4 text-center">
-              Extracted Data of Your Featured Areas
-            </h2>
-            <div className="flex justify-center mb-4">
-              <Link to="/Result">
-                <button className="px-6 py-3 rounded-md border border-black bg-white text-black text-sm sm:text-base hover:shadow-[6px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
-                  Click Here
-                </button>
-              </Link>
-            </div>
-            <p className="text-gray-600 text-center">
-              Explore our featured locations and discover detailed information about each area.
-              Click to learn more about demographics, amenities, and local attractions.
-            </p>
-          </div>
+          
+
+         
         </div>
       </main>
     </div>
