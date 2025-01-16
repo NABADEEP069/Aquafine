@@ -1,38 +1,37 @@
 import { useAuth } from '../context/AuthContext';
-import Mapp from '../components/Map';
 import { Link } from 'react-router-dom';
-import { Search } from 'lucide-react';
 
 export default function Home() {
   const { user } = useAuth();
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+       
         {user && (
-          <div className="mb-8 bg-white border border-blue-300 rounded-lg p-4">
+          <div className="mb-5 bg-white border border-blue-300 rounded-lg p-2.5">
             <h1 className="text-xl font-semibold text-blue-500 text-center">
               Hey {user.email}, Welcome!
             </h1>
           </div>
         )}
 
-        <h1 className="text-lg sm:text-xl md:text-2xl text-gray-800 mb-8 text-center">
-          AquaFine iss an innovative solution designed to revolutionize fish production planning by leveraging cutting-edge technology. Traditional methods of manual surveys are labor-intensive, error-prone, and inadequate for large or remote water bodies. AquaFine addresses these challenges through advanced remote sensing, AI, and data-driven insights to optimize aquaculture operations. By integrating satellite imagery, environmental data, and predictive models, AquaFine provides scalable tools for precise production potential estimation.
+      
+        <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-800 mb-12 text-center max-w-4xl mx-auto leading-relaxed">
+          <span className="font-light">AquaFine is an innovative solution designed to</span>{' '}
+          <span className="font-semibold text-blue-600">revolutionize fish production planning</span>{' '}
+          <span className="font-light">by leveraging cutting-edge technology.</span>{' '}
+          <span className="font-normal">
+            Through advanced remote sensing, AI, and data-driven insights, AquaFine optimizes aquaculture operations, providing scalable tools for precise production potential estimation.
+          </span>
         </h1>
 
-        <div>
-          <div className="flex items-center justify-center h-[150px]">
-            <Link to="/auth">
-              <button className="px-6 py-3 rounded-md border border-black bg-white text-black text-sm sm:text-base hover:shadow-[6px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
-                Get Started
-              </button>
-            </Link>
-          </div>
-
-          
-
-         
+        <div className="flex items-center justify-center">
+          <Link to="/auth">
+            <button className="px-6 py-3 rounded-md border border-black bg-white text-black text-sm sm:text-base hover:shadow-[6px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
+              Get Started
+            </button>
+          </Link>
         </div>
       </main>
     </div>

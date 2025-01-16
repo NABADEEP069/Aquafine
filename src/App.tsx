@@ -6,7 +6,6 @@ import Home from './pages/Home';
 import Details from './pages/Details';
 import Auth from './pages/Auth';
 import Profile from './pages/profile';
-import { TypewriterEffect } from './components/ui/typewriter-effect';
 import Result from './pages/Result';
 import Search from './pages/search';
 
@@ -19,7 +18,7 @@ const App: React.FC = () => {
         <div className="flex flex-col min-h-screen ">
           <Navbar />
           <br />
-          <TypewriterEffect words={[{ text: 'Welcome to Aquafine AI' }]} />
+          
           <br />
           <div className="flex-grow">
             <Routes>

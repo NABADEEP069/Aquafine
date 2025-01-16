@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import Mapp from "../components/Map"; // Adjust the path as necessary
+import Mapp from "../components/Map"; 
 
 export default function Search() {
  return (
@@ -11,7 +11,7 @@ export default function Search() {
 
          <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xxl transition-shadow duration-500 cursor-pointer">
             <h2 className="text-2xl sm:text-3xl font-semibold mb-4 text-center">
-              Extracted Data of Your Featured Areas
+              Extracted Data of Your Selected Areas
             </h2>
             <div className="flex justify-center mb-4">
               <Link to="/Result">
