@@ -1,3 +1,4 @@
+
 export default function Footer() {
   return (
     <footer className="bg-white text-black py-1">
@@ -43,6 +44,10 @@ export default function Footer() {
               </li>
             </ul>
           </div>
+        
+
+
+
         </div>
 
         {/* Footer Bottom Section */}
