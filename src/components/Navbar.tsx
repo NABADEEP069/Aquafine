@@ -67,7 +67,7 @@ export default function Navbar() {
           <div className="lg:hidden flex flex-col space-y-2 mt-2">
             <Link
               to="/"
-              className="text-black px-4 py-2 border-b border-gray-200"
+              className="px-12 py-2 text-black backdrop-blur-sm border border-black rounded-md hover:shadow-[2px_2px_5px_4px_rgba(0,0,0,0.1)] bg-white/[0.2] text-sm transition duration-200"
               onClick={() => setMenuOpen(false)}
             >
               Home
@@ -76,7 +76,7 @@ export default function Navbar() {
               onClick={handleSignOut}
               className="px-4 py-2 text-black backdrop-blur-sm border border-black rounded-md hover:shadow-[2px_2px_5px_4px_rgba(0,0,0,0.1)] bg-white/[0.2] text-sm transition duration-200"
             >
-              <LogOut className="h-0 w-5 inline-block" />
+              <LogOut className="h-4 w-4 inline-block" />
               <span>Sign Out</span>
             </button>
           </div>
