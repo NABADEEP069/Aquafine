@@ -1,8 +1,8 @@
-
 'use client'
 
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 interface DataType {
   reportTitle: string;
@@ -32,12 +32,22 @@ const App = () => {
     setTimeout(() => setCopyButtonText("Copy Data"), 2000);
   };
 
+  const handleDownload = () => {
+    if (!data) return;
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'data.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   useEffect(() => {
     const loadingTimer = setTimeout(() => {
       setIsLoading(false);
       setIsGenerating(true);
 
-      // Use dynamic import with error handling
       import('./public/data.json')
         .then((module) => {
           if (Object.keys(module).length === 0) {
@@ -55,7 +65,7 @@ const App = () => {
               clearInterval(interval);
               setIsGenerating(false);
             }
-          }, 50);
+          }, 20);
         })
         .catch((error) => {
           console.error('Error loading JSON:', error);
@@ -89,72 +99,53 @@ const App = () => {
           <ErrorState message="No data available" />
         )}
       </div>
+      <div className="flex items-center justify-center mt-4">
+        <button
+          onClick={handleDownload}
+          className="px-6 py-3 rounded-md border border-black bg-white text-black text-sm sm:text-base hover:shadow-[6px_4px_0px_0px_rgba(0,0,0)] transition duration-200"
+        >
+          Download Data
+        </button>
+      </div>
     </div>
   );
 };
 
-const LoadingState = () => (
-  <div className="flex flex-col justify-center items-center h-80">
-    <motion.div
-      className="w-3/4 h-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
-      animate={{
-        scaleX: [1, 1.5, 1],
-        opacity: [1, 0.5, 1],
-      }}
-      transition={{
-        duration: 1.5,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
-    />
-    <p className="text-gray-700 mt-4 text-lg font-semibold">Loading...</p>
-  </div>
-);
-
-const GeneratingState = ({ generatedData }: { generatedData: string }) => (
-  <div className="flex flex-col justify-center items-center h-96">
-    <motion.div
-      className="w-1/2 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl"
-      animate={{
-        scale: [1, 1.05, 1],
-      }}
-      transition={{
-        duration: 1,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
-    />
-    <p className="text-gray-700 mt-4 text-lg font-semibold">Generating your data...</p>
-    <pre className="bg-gray-100 p-4 rounded-lg text-sm text-gray-800 mt-4 overflow-x-auto max-h-60 w-full">
-      <code>{generatedData || "// Initializing..."}</code>
-    </pre>
+const ErrorState = ({ message }: { message: string }) => (
+  <div className="text-center text-red-500">
+    <p>{message}</p>
   </div>
 );
 
 const DataDisplay = ({ data, handleCopy, copyButtonText }: { data: DataType, handleCopy: () => void, copyButtonText: string }) => (
   <div>
-    <h2 className="text-xl font-semibold text-gray-700 mb-4">
-      Successfully Generated Data:
-    </h2>
-    <pre className="bg-gray-100 p-4 rounded-lg text-sm text-gray-800 overflow-x-auto max-h-96 mb-4">
-      <code>{JSON.stringify(data, null, 2)}</code>
+    <pre className="bg-gray-100 p-4 rounded-md overflow-x-auto">
+      {JSON.stringify(data, null, 2)}
     </pre>
-    <motion.button
+    <button
       onClick={handleCopy}
-      className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow-lg font-semibold transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-      whileTap={{ scale: 0.95 }}
+      className="mt-4 px-6 py-3 rounded-md border border-black bg-white text-black text-sm sm:text-base hover:shadow-[6px_4px_0px_0px_rgba(0,0,0)] transition duration-200"
     >
       {copyButtonText}
-    </motion.button>
+    </button>
   </div>
 );
 
-const ErrorState = ({ message }: { message: string }) => (
-  <div className="text-center text-red-500">
-    <p className="text-lg font-semibold">Error: {message}</p>
-    <p className="mt-2">Please check if the data.json file exists in the public folder and is not empty.</p>
+const LoadingState = () => (
+  <div className="text-center text-gray-500">
+    <p>Loading...</p>
   </div>
 );
+
+const GeneratingState = ({ generatedData }: { generatedData: string }) => (
+  <div className="text-center text-gray-500">
+    <pre className="bg-gray-100 p-4 rounded-md overflow-x-auto">
+      {generatedData}
+    </pre>
+    <p>Generating data...</p>
+  </div>
+);
+
+// Other components remain unchanged
 
 export default App;
-
