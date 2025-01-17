@@ -31,11 +31,11 @@ export default function MapWithSearch() {
 
   return (
     <LoadScript googleMapsApiKey={apiKey} libraries={['places']}>
-      <div style={{ textAlign: 'center', padding: '0 10px' }}> 
+      <div style={{ textAlign: 'left', padding: '0 10px' }}> 
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={coordinates}
-          zoom={12}
+          zoom={10}
         >
           <Marker position={coordinates} />
         </GoogleMap>
@@ -55,7 +55,8 @@ export default function MapWithSearch() {
                   })}
                   style={{
                     width: '100%',
-                    padding: '10px',
+                    padding: '12px',
+                    marginTop: '18px',
                     fontSize: '14px',
                     border: '1px solid #ccc',
                     borderRadius: '6px',
@@ -68,7 +69,7 @@ export default function MapWithSearch() {
                     backgroundColor: '#fff',
                     border: '1px solid #ccc',
                     borderRadius: '4px',
-                    marginTop: '5px',
+                    marginTop: '18px',
                     maxHeight: '200px',
                     overflowY: 'auto',
                   }}
