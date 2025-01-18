@@ -1,8 +1,6 @@
-'use client'
+'use client';
 
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 
 interface DataType {
   reportTitle: string;
@@ -25,22 +23,31 @@ const App = () => {
   const [generatedData, setGeneratedData] = useState("");
   const [copyButtonText, setCopyButtonText] = useState("Copy Data");
   const [error, setError] = useState<string | null>(null);
+  const [generationIntervalId, setGenerationIntervalId] = useState<ReturnType<typeof setInterval> | null>(null);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(JSON.stringify(data, null, 2));
+    navigator.clipboard.writeText(generatedData);
     setCopyButtonText("Copied!");
     setTimeout(() => setCopyButtonText("Copy Data"), 2000);
   };
 
   const handleDownload = () => {
     if (!data) return;
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'data.json';
+    a.download = 'data.txt';
     a.click();
     URL.revokeObjectURL(url);
+  };
+
+  const stopGeneration = () => {
+    if (generationIntervalId) {
+      clearInterval(generationIntervalId); 
+      setGenerationIntervalId(null);
+      setIsGenerating(false); 
+    }
   };
 
   useEffect(() => {
@@ -57,15 +64,19 @@ const App = () => {
 
           const dataString = JSON.stringify(module.default, null, 2);
           let index = 0;
-          const interval = setInterval(() => {
+
+          const intervalId = setInterval(() => {
             if (index < dataString.length) {
               setGeneratedData((prev) => prev + dataString[index]);
               index++;
             } else {
-              clearInterval(interval);
+              clearInterval(intervalId);
+              setGenerationIntervalId(null);
               setIsGenerating(false);
             }
           }, 20);
+
+          setGenerationIntervalId(intervalId as ReturnType<typeof setInterval>);
         })
         .catch((error) => {
           console.error('Error loading JSON:', error);
@@ -74,7 +85,10 @@ const App = () => {
         });
     }, 3000);
 
-    return () => clearTimeout(loadingTimer);
+    return () => {
+      clearTimeout(loadingTimer);
+      if (generationIntervalId) clearInterval(generationIntervalId);
+    };
   }, []);
 
   return (
@@ -90,23 +104,25 @@ const App = () => {
         {isLoading ? (
           <LoadingState />
         ) : isGenerating ? (
-          <GeneratingState generatedData={generatedData} />
+          <GeneratingState generatedData={generatedData} stopGeneration={stopGeneration} />
         ) : error ? (
           <ErrorState message={error} />
         ) : data ? (
-          <DataDisplay data={data} handleCopy={handleCopy} copyButtonText={copyButtonText} />
+          <DataDisplay data={generatedData} handleCopy={handleCopy} copyButtonText={copyButtonText} />
         ) : (
           <ErrorState message="No data available" />
         )}
       </div>
-      <div className="flex items-center justify-center mt-4">
-        <button
-          onClick={handleDownload}
-          className="px-6 py-3 rounded-md border border-black bg-white text-black text-sm sm:text-base hover:shadow-[6px_4px_0px_0px_rgba(0,0,0)] transition duration-200"
-        >
-          Download Data
-        </button>
-      </div>
+      {!isGenerating && data && (
+        <div className="flex items-center justify-center mt-4">
+          <button
+            onClick={handleDownload}
+            className="px-6 py-3 rounded-md border border-black bg-white text-black text-sm sm:text-base hover:shadow-[6px_4px_0px_0px_rgba(0,0,0)] transition duration-200"
+          >
+            Download Data
+          </button>
+        </div>
+      )}
     </div>
   );
 };
@@ -117,10 +133,10 @@ const ErrorState = ({ message }: { message: string }) => (
   </div>
 );
 
-const DataDisplay = ({ data, handleCopy, copyButtonText }: { data: DataType, handleCopy: () => void, copyButtonText: string }) => (
+const DataDisplay = ({ data, handleCopy, copyButtonText }: { data: string, handleCopy: () => void, copyButtonText: string }) => (
   <div>
     <pre className="bg-gray-100 p-4 rounded-md overflow-x-auto">
-      {JSON.stringify(data, null, 2)}
+      {data}
     </pre>
     <button
       onClick={handleCopy}
@@ -137,15 +153,19 @@ const LoadingState = () => (
   </div>
 );
 
-const GeneratingState = ({ generatedData }: { generatedData: string }) => (
+const GeneratingState = ({ generatedData, stopGeneration }: { generatedData: string, stopGeneration: () => void }) => (
   <div className="text-center text-gray-500">
     <pre className="bg-gray-100 p-4 rounded-md overflow-x-auto">
       {generatedData}
     </pre>
     <p>Generating data...</p>
+    <button
+      onClick={stopGeneration}
+      className="mt-4 px-6 py-3 rounded-md border border-red-500 bg-white text-red-500 text-sm sm:text-base hover:shadow-[6px_4px_0px_0px_rgba(255,0,0)] transition duration-200"
+    >
+      Stop Generation
+    </button>
   </div>
 );
-
-// Other components remain unchanged
 
 export default App;
