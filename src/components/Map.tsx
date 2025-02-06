@@ -13,8 +13,8 @@ const containerStyle = {
 };
 
 const defaultCenter = {
-  lat: 26.1445, // Default (Guwahati)
-  lng: 91.7362, // Default (Guwahati)
+  lat: 26.1445, //  (Guwahati)
+  lng: 91.7362, //  (Guwahati)
 };
 
 export default function MapWithSearch() {

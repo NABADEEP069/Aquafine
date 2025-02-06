@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LogOut } from 'lucide-react';
 import { supabase } from '../lib/supabase';
-import { useAuth } from '../hooks/useAuth'; // Ensure this path is correct or update it to the correct path
+import { useAuth } from '../hooks/useAuth'; 
 
 
 import toast from 'react-hot-toast';

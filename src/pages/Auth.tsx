@@ -81,7 +81,7 @@ export default function Auth() {
                 {isSignUp ? 'Create an Account' : 'Welcome Back'}
               </h2>
               <p className="text-gray-600">
-                {isSignUp ? 'Join our community today!' : 'Sign in to continue'}
+                {isSignUp ? 'Hey Buddy!' : 'Sign in to continue'}
               </p>
             </div>
 

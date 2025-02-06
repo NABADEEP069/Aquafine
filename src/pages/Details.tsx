@@ -7,9 +7,9 @@ export default function Details() {
             Area Details
           </h1>
 
-          {/* Grid layout for Demographics and Amenities */}
+         
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-            {/* Demographics Section */}
+        
             <div>
               <h2 className="text-lg md:text-xl font-semibold mb-4">Demographics</h2>
               <ul className="space-y-2 text-gray-600">
@@ -20,7 +20,6 @@ export default function Details() {
               </ul>
             </div>
 
-            {/* Amenities Section */}
             <div>
               <h2 className="text-lg md:text-xl font-semibold mb-4">Amenities</h2>
               <ul className="space-y-2 text-gray-600">
@@ -32,7 +31,7 @@ export default function Details() {
             </div>
           </div>
 
-          {/* Description Section */}
+         
           <div className="mt-8">
             <h2 className="text-lg md:text-xl font-semibold mb-4">Description</h2>
             <p className="text-gray-600 text-justify sm:text-left">

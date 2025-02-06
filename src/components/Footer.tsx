@@ -6,7 +6,7 @@ export default function Footer() {
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-          {/* Left Column */}
+          {/* Left r Column */}
           <div>
             <h4 className="text-2xl font-semibold mb-3">Aquafine AI</h4>
             <p className="text-gray-800">

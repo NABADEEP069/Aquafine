@@ -22,7 +22,7 @@ export default function Search() {
             </div>
             <p className="text-gray-600 text-center">
               Explore our featured locations and discover detailed information about each area.
-              Click to learn more about demographics, amenities, and local attractions.
+              Click to generate data.
             </p>
           </div>
      </div>
