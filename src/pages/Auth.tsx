@@ -19,7 +19,7 @@ export default function Auth() {
 
     try {
       if (isSignUp) {
-        const { data, error: signUpError } = await supabase.auth.signUp({
+        const { data, error: signUpError } = await supabase.auth.signInWithPassword({
           email,
           password,
         });

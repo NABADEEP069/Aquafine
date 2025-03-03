@@ -1,4 +1,4 @@
-import { div, main } from 'framer-motion/client';
+
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
 
@@ -69,6 +69,8 @@ export default function Home() {
     </div>
   );
 }
+
+
 
 
 
